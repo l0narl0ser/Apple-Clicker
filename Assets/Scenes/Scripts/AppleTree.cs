@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class AppleTree : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _applePrefab;
+
+    [SerializeField]
+    private float secondsBetweenAppleDrops = 1f;
 
     public float speed = 1f;
     public float leftAndRightEdge = 15;
     public float changeToChangeDirection = 0.1f;
+
     void Start()
     {
-
+        Invoke("AppleDrop", 2f); //вызов метода через промежуток времени
     }
 
 
@@ -20,7 +26,7 @@ public class AppleTree : MonoBehaviour
         ChangeDirection();
     }
 
-      private void FixedUpdate()
+    private void FixedUpdate()
     {
         RandonChangeDirection();
     }
@@ -53,5 +59,16 @@ public class AppleTree : MonoBehaviour
         {
             speed *= -1;
         }
+    }
+
+    void AppleDrop()
+    {
+        
+        GameObject apple = Instantiate<GameObject>(_applePrefab); //созздали объект яблоко
+
+        apple.transform.SetParent(transform);
+       
+        apple.transform.position = transform.position; //позиция того объекта, к которому привязан скрипт
+        Invoke("AppleDrop", secondsBetweenAppleDrops); //рекурсия
     }
 }
