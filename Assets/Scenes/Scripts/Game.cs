@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -24,6 +25,18 @@ public class Game : MonoBehaviour
             Vector3 pos = Vector3.zero; //(0,0,0)
             pos.y = _basketBootomY + (_basketSpacingY * i);
             tbasketGo.transform.position = pos;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            for (int j = 0; j < 155555; j++)
+            {
+                var t = transform.GetComponent<Rigidbody>();
+                var p = transform.GetComponent(typeof(Rigidbody));
+                var po = transform.GetComponent("Rigidbody");
+                GameObject.FindObjectOfType<Rigidbody>();
+
+            }
+            stopwatch.Stop();
+            double d = stopwatch.ElapsedTicks;
         }
     }
 
