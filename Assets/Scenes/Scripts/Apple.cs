@@ -13,9 +13,13 @@ public class Apple : MonoBehaviour
     
     void Update()
     {
-        if(transform.position.y < bottomY)
+        if (transform.position.y < bottomY)
         {
             Destroy(this.gameObject);
+            Game allAppleDestroy = GameObject.Find("Game").GetComponent<Game>();
+            allAppleDestroy.AppleDestroyed();
         }
     }
+
+   
 }
