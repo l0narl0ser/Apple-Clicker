@@ -23,6 +23,11 @@ public class Game : MonoBehaviour
 
     private int _highScore = 0;
 
+    public int _countToLevelEnd = 600;
+
+
+    public bool _isLevelComplited = false;
+
     void Start()
     {
         LoadScore();
@@ -72,6 +77,7 @@ public class Game : MonoBehaviour
         TMP_Text scoreText = scoreGo.GetComponent<TMP_Text>();
         if (_highScore < int.Parse(scoreText.text))
         {
+            _highScore = int.Parse(scoreText.text);
             PlayerPrefs.SetInt("HighScore", _highScore);
         }
     }
@@ -96,5 +102,22 @@ public class Game : MonoBehaviour
 
     }
 
- 
+    public void ScoreIncrease()
+    {
+        GameObject scoreGo = GameObject.Find("ScoreCounter");
+        TMP_Text scoreText = scoreGo.GetComponent<TMP_Text>();
+        int sc = int.Parse(scoreText.text);
+        sc += 100;
+        scoreText.text = sc.ToString();
+        if (sc >= _countToLevelEnd)
+        {
+            _isLevelComplited = true;
+            SceneManager.LoadScene("Level2");
+        }
+        //_isLevelComplited = (sc >= _countToLevelEnd);
+        //добавить второй уровень с ускорением €блони, €блока, баллы увеличить 
+        //сделать ещЄ одну сцену
+
+    }
+
 }
