@@ -25,9 +25,16 @@ public class Game : MonoBehaviour
 
     public int _countToLevelEnd = 600;
 
-
     public bool _isLevelComplited = false;
 
+
+    //загружает очки
+    private void Awake()
+    {
+        LoadScore();
+    }
+
+    //создает корзины
     void Start()
     {
         LoadScore();
@@ -44,13 +51,7 @@ public class Game : MonoBehaviour
         }
     }
 
-
-
-    void Update()
-    {
-
-    }
-
+    //уд€л€ет все €блоки
     public void AppleDestroyed()
     {
         GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag("Apple");
@@ -59,15 +60,17 @@ public class Game : MonoBehaviour
             Destroy(item);
         }
 
+        //удал€ет корзины
         int basketIndex = basketList.Count - 1;
         GameObject tbasketGo = basketList[basketIndex];
         basketList.RemoveAt(basketIndex);
         Destroy(tbasketGo);
 
+        
         if (basketList.Count == 0)
         {
             SaveScore();
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level1");
         }
     }
 
@@ -79,6 +82,11 @@ public class Game : MonoBehaviour
         {
             _highScore = int.Parse(scoreText.text);
             PlayerPrefs.SetInt("HighScore", _highScore);
+
+            if(_highScore > _countToLevelEnd)
+            {
+                SceneManager.LoadScene("Level2");
+            }
         }
     }
 
@@ -114,10 +122,14 @@ public class Game : MonoBehaviour
             _isLevelComplited = true;
             SceneManager.LoadScene("Level2");
         }
-        //_isLevelComplited = (sc >= _countToLevelEnd);
+        //_isLevelComplited = (sc >= _countToLevelEnd); вместо услови€ 
         //добавить второй уровень с ускорением €блони, €блока, баллы увеличить 
         //сделать ещЄ одну сцену
 
     }
-
+    //public void OnApplicationPause(bool pause)
+    //{
+    //    SceneManager.LoadScene("CreateMenu");
+    //    Time.timeScale = 1f;
+    //}
 }
