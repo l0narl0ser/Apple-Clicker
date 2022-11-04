@@ -64,7 +64,7 @@ public class AppleTree : MonoBehaviour
     void AppleDrop()
     {
         
-        GameObject apple = Instantiate<GameObject>(_applePrefab); //созздали объект яблоко
+        GameObject apple = Instantiate<GameObject>(_applePrefab); //создали объект яблоко
 
         apple.transform.SetParent(transform);
        
